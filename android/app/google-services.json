@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "453651186731",
+    "project_id": "kasir-kafe-app",
+    "storage_bucket": "kasir-kafe-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453651186731:android:956f8d9de422410cf1166e",
+        "android_client_info": {
+          "package_name": "in.ryzntx.cashier.kasir_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453651186731-eddiq90hai7k97j9ndt2veet5r8oe9re.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAANrITfWR5P1t_XeE37pLjOnbjoDR0Dg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453651186731-eddiq90hai7k97j9ndt2veet5r8oe9re.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
