@@ -1,10 +1,8 @@
-import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 import 'package:get/get.dart';
 
-import '../../../../constants/firebase_constant.dart';
+import '../../../../constants/firebase.dart';
 import '../controllers/users_controller.dart';
 
 class UsersView extends GetView<UsersController> {

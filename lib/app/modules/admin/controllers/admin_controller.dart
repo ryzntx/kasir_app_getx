@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class AdminController extends GetxController {
   //TODO: Implement AdminController
+  static AdminController instance = Get.find();
 
   final count = 0.obs;
   @override

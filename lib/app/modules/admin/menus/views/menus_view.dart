@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,18 +23,79 @@ class MenusView extends GetView<MenusController> {
           itemCount: controller.menu.length,
           itemBuilder: (context, index) {
             return Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14.0)),
               child: ListTile(
-                title: Text(controller.menu[index].name!),
-                subtitle: Text(controller.menu[index].price!),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete_forever),
-                  onPressed: () {
-                    displayDeleteDialog(controller.menu[index].id!);
-                  },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14.0)),
+                title: Container(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 30,
+                        child: Container(
+                          child: Avatar(
+                            sources: [
+                              NetworkSource(controller.menu[index].photo!),
+                            ],
+                            useCache: true,
+                            name: controller.menu[index].name!,
+                            shape: AvatarShape(
+                                width: 70,
+                                height: 70,
+                                shapeBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        flex: 60,
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                controller.menu[index].name!,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                'Rp.${controller.menu[index].price!}',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 10,
+                        child: IconButton(
+                          icon: Icon(Icons.delete_forever),
+                          onPressed: () {
+                            displayDeleteDialog(controller.menu[index].id!);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                //title: Text(controller.menu[index].name!),
+                // subtitle: Text(controller.menu[index].price!),
+                // trailing: IconButton(
+                //   icon: Icon(Icons.delete_forever),
+                //   onPressed: () {
+                //     displayDeleteDialog(controller.menu[index].id!);
+                //   },
+                // ),
                 onTap: () {
                   controller.nameMenu.text = controller.menu[index].name!;
                   controller.priceMenu.text = controller.menu[index].price!;
+                  controller.url.value = controller.menu[index].photo!;
                   _buildAddEditEmployeeView(
                       text: 'Update',
                       addEditFlag: 2,
@@ -92,10 +154,7 @@ class MenusView extends GetView<MenusController> {
                         width: 130,
                         height: 130,
                         decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color:
-                                  Theme.of(context!).scaffoldBackgroundColor),
+                          border: Border.all(width: 4, color: Colors.blue),
                           boxShadow: [
                             BoxShadow(
                                 spreadRadius: 2,
@@ -108,18 +167,25 @@ class MenusView extends GetView<MenusController> {
                         child: CircleAvatar(
                           radius: 100,
                           child: ClipOval(
-                            child: SizedBox(
-                              width: 180.0,
-                              height: 180.0,
-                              child: (controller.picker == null)
-                                  ? null
-                                  : Image.file(
-                                      controller.image!,
-                                      fit: BoxFit.cover,
-                                    ),
-                              // Image.file(
-                              //   _image,
-                              // fit: BoxFit.cover,
+                            child: Obx(
+                              () => SizedBox(
+                                width: 180.0,
+                                height: 180.0,
+                                child: (addEditFlag == 1)
+                                    ? (controller.selectedImagePath.value == '')
+                                        ? null
+                                        : Obx(
+                                            (() => Image.file(
+                                                  File(controller
+                                                      .selectedImagePath.value),
+                                                  fit: BoxFit.cover,
+                                                )),
+                                          )
+                                    : (addEditFlag == 2)
+                                        ? Image.network(controller.url.value,
+                                            fit: BoxFit.cover)
+                                        : null,
+                              ),
                             ),
                           ),
                         ),
@@ -139,34 +205,9 @@ class MenusView extends GetView<MenusController> {
                             ),
                             padding: const EdgeInsets.all(2),
                             shape: const CircleBorder(),
-                            onPressed: () => Get.bottomSheet(
-                              Container(
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      title: const Text("Kamera"),
-                                      subtitle: const Text(
-                                          "Ambil foto dari kamera anda"),
-                                      leading: const Icon(Icons.camera_alt),
-                                      onTap: () async {
-                                        controller.pickImageFromCamera();
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    ListTile(
-                                      title: const Text("Galeri"),
-                                      subtitle: const Text(
-                                          "Ambil foto dari galeri hp anda"),
-                                      leading: const Icon(Icons.image_rounded),
-                                      onTap: () async {
-                                        controller.pickImageFromGallery();
-                                        Navigator.of(context).pop();
-                                      },
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
+                            onPressed: () {
+                              displayGetImage();
+                            },
                           ),
                         ),
                       ),
@@ -222,6 +263,58 @@ class MenusView extends GetView<MenusController> {
                   ),
                 ],
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  displayGetImage() {
+    Get.bottomSheet(
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(16),
+            topLeft: Radius.circular(16),
+          ),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextDivider(
+                  text: Text(
+                    'Select Image',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  ),
+                  thickness: 2,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                ListTile(
+                  title: const Text("Kamera"),
+                  subtitle: const Text("Ambil foto dari kamera anda"),
+                  leading: const Icon(Icons.camera_alt),
+                  onTap: () async {
+                    controller.getImage(ImageSource.camera);
+                    Get.back();
+                  },
+                ),
+                ListTile(
+                  title: const Text("Galeri"),
+                  subtitle: const Text("Ambil foto dari galeri hp anda"),
+                  leading: const Icon(Icons.image_rounded),
+                  onTap: () async {
+                    controller.getImage(ImageSource.gallery);
+                    Get.back();
+                  },
+                )
+              ],
             ),
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Menu {
+  static const ID = "id";
   static const NAME = "name";
   static const PRICE = "price";
   static const PHOTO = "photo";
@@ -16,13 +17,14 @@ class Menu {
     name = snapshot.get(NAME);
     price = snapshot.get(PRICE);
     photo = snapshot.get(PHOTO);
+    id = snapshot.id;
   }
 
-  Menu.fromMap(DocumentSnapshot snapshot) {
-    name = snapshot[NAME];
-    price = snapshot[PRICE];
-    photo = snapshot[PHOTO];
-    id = snapshot.id;
+  Menu.fromMap(Map<String, dynamic> data) {
+    name = data[NAME];
+    price = data[PRICE];
+    photo = data[PHOTO];
+    id = data[ID];
   }
 
   // Menu.fromJson(Map<String, Object?> json)

@@ -7,13 +7,13 @@ import 'package:kasir_app_getx/app/modules/admin/views/admin_view.dart';
 import 'package:kasir_app_getx/app/modules/auth/views/auth_view.dart';
 import 'package:kasir_app_getx/app/modules/cashier/views/cashier_view.dart';
 
-import '../../../constants/firebase_constant.dart';
+import '../../../constants/firebase.dart';
 import '../../../data/models/users_model.dart';
 
 class AuthController extends GetxController {
   //TODO: Implement AuthController
 
-  static AuthController authInstance = Get.find();
+  static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
   late Rx<FirebaseFirestore> firestore;
 

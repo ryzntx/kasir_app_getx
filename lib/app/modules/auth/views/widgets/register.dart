@@ -117,7 +117,7 @@ class RegisterWidget extends StatelessWidget {
                         controller.isLoading.isFalse;
                         if (_formKey.currentState!.validate()) {
                           controller.isLoading.isTrue;
-                          AuthController.authInstance.register();
+                          AuthController.instance.register();
                         }
                       },
                       child: Text(controller.isLoading.value

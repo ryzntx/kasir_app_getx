@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:kasir_app_getx/app/constants/firebase_constant.dart';
+import 'package:kasir_app_getx/app/constants/firebase.dart';
 
 import 'app/modules/auth/controllers/auth_controller.dart';
 import 'app/routes/app_pages.dart';

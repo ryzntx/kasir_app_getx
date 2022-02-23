@@ -10,7 +10,7 @@ class LogoutButton extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.exit_to_app),
       onPressed: () {
-        AuthController.authInstance.signOut();
+        AuthController.instance.signOut();
       },
     );
   }

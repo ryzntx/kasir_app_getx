@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kasir_app_getx/app/widgets/logout_button.dart';
 
 import '../controllers/cashier_controller.dart';
+import 'widgets/products.dart';
 
 class CashierView extends GetView<CashierController> {
   @override
@@ -16,11 +17,8 @@ class CashierView extends GetView<CashierController> {
           LogoutButton(),
         ],
       ),
-      body: Center(
-        child: Text(
-          'CashierView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Container(
+        child: MenuListWidgets(),
       ),
     );
   }

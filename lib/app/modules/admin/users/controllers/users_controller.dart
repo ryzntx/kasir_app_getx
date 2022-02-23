@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kasir_app_getx/app/data/models/users_model.dart';
 
-import '../../../../constants/firebase_constant.dart';
+import '../../../../constants/firebase.dart';
 
 class UsersController extends GetxController {
   //TODO: Implement UsersController
+
+  static UsersController instance = Get.find();
 
   late CollectionReference collectionReference;
   final data = FirebaseFirestore.instance;

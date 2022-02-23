@@ -96,7 +96,7 @@ class LoginWidget extends StatelessWidget {
                     controller.isLoadings();
                     if (_formKey.currentState!.validate()) {
                       controller.isLoadings();
-                      AuthController.authInstance.login();
+                      AuthController.instance.login();
                     }
                   },
                   child: Text(
