@@ -1,5 +1,5 @@
 name: kasir_app_getx
-version: 1.0.0+1
+version: 1.0.0+3
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -16,6 +16,8 @@ dependencies:
   text_divider: 1.0.0
   path: 1.8.0
   image_picker: 0.8.4+9
+  modal_bottom_sheet: 2.0.0
+  responsive_framework: 0.1.7
   flutter: 
     sdk: flutter
 

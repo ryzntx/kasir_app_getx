@@ -256,7 +256,7 @@ class MenusView extends GetView<MenusController> {
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
-                        controller.saveUpdateEmployee(controller.nameMenu.text,
+                        controller.saveUpdateMenu(controller.nameMenu.text,
                             controller.priceMenu.text, docId!, addEditFlag!);
                       },
                     ),

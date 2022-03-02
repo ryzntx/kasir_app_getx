@@ -10,7 +10,7 @@ class MenuListWidgets extends StatelessWidget {
     return Obx(
       () => GridView.count(
         crossAxisCount: 2,
-        childAspectRatio: .63,
+        childAspectRatio: .90,
         padding: const EdgeInsets.all(10),
         mainAxisSpacing: 4,
         crossAxisSpacing: 10,

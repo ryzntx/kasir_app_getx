@@ -59,6 +59,7 @@ class MenusController extends GetxController {
       print(selectedImagePath.value);
     } else {
       CustomSnackBar.showSnackBar(
+          position: SnackPosition.BOTTOM,
           context: Get.context,
           title: 'Error',
           message: 'No Image Selected',
@@ -80,7 +81,7 @@ class MenusController extends GetxController {
     return null;
   }
 
-  Future<void> saveUpdateEmployee(
+  Future<void> saveUpdateMenu(
       String name, String price, String docId, int addEditFlag) async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
@@ -97,6 +98,7 @@ class MenusController extends GetxController {
       var dowurl =
           await (await uploadTask).ref.getDownloadURL().catchError((e) {
         CustomSnackBar.showSnackBar(
+            position: SnackPosition.BOTTOM,
             context: Get.context,
             title: 'Error',
             message: e.toString(),
@@ -112,6 +114,7 @@ class MenusController extends GetxController {
         clearEditingControllers();
         Get.back();
         CustomSnackBar.showSnackBar(
+            position: SnackPosition.BOTTOM,
             context: Get.context,
             title: "Menu Added",
             message: "New menu added successfully",
@@ -119,6 +122,7 @@ class MenusController extends GetxController {
       }).catchError((error) {
         CustomFullScreenDialog.cancelDialog();
         CustomSnackBar.showSnackBar(
+            position: SnackPosition.BOTTOM,
             context: Get.context,
             title: "Error",
             message: "Something went wrong",
@@ -135,6 +139,7 @@ class MenusController extends GetxController {
         clearEditingControllers();
         Get.back();
         CustomSnackBar.showSnackBar(
+            position: SnackPosition.BOTTOM,
             context: Get.context,
             title: "Menu Updated",
             message: "Menu updated successfully",
@@ -142,6 +147,7 @@ class MenusController extends GetxController {
       }).catchError((error) {
         CustomFullScreenDialog.cancelDialog();
         CustomSnackBar.showSnackBar(
+            position: SnackPosition.BOTTOM,
             context: Get.context,
             title: "Error",
             message: "Something went wrong",
@@ -156,6 +162,7 @@ class MenusController extends GetxController {
       CustomFullScreenDialog.cancelDialog();
       Get.back();
       CustomSnackBar.showSnackBar(
+          position: SnackPosition.BOTTOM,
           context: Get.context,
           title: "Menu Deleted",
           message: "Menu deleted successfully",
@@ -163,6 +170,7 @@ class MenusController extends GetxController {
     }).catchError((error) {
       CustomFullScreenDialog.cancelDialog();
       CustomSnackBar.showSnackBar(
+          position: SnackPosition.BOTTOM,
           context: Get.context,
           title: "Error",
           message: "Something went wrong",

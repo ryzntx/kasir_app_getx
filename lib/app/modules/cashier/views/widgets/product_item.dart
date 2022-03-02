@@ -1,7 +1,9 @@
+import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:kasir_app_getx/app/data/models/menus_model.dart';
 
 import '../../../../widgets/custom_text.dart';
+import 'add_to_cart.dart';
 
 class MenuItemWidgets extends StatelessWidget {
   final Menu menu;
@@ -22,24 +24,36 @@ class MenuItemWidgets extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-              ),
-              child: Image.network(
-                menu.photo!,
-                width: double.infinity,
+          Expanded(
+            child: Avatar(
+              useCache: true,
+              sources: [
+                NetworkSource(
+                  menu.photo!,
+                ),
+              ],
+              name: menu.name,
+              shape: AvatarShape(
+                width: MediaQuery.of(context).size.width,
+                height: 100,
+                shapeBorder: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                ),
               ),
             ),
           ),
-          CustomText(
-            text: menu.name,
-            size: 18,
-            weight: FontWeight.bold,
+          Padding(
+            padding: EdgeInsets.only(left: 8),
+            child: CustomText(
+              text: menu.name,
+              size: 18,
+              weight: FontWeight.bold,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,7 +69,20 @@ class MenuItemWidgets extends StatelessWidget {
               SizedBox(
                 width: 30,
               ),
-              IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () {})
+              IconButton(
+                  icon: Icon(Icons.add_shopping_cart),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return AddToCartWidgets(
+                            title: menu.name!,
+                            price: menu.price!,
+                            image: menu.photo!,
+                            menu: menu,
+                          );
+                        });
+                  })
             ],
           ),
         ],

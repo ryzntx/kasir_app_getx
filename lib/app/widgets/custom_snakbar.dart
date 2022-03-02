@@ -8,9 +8,10 @@ class CustomSnackBar {
     required String title,
     required String message,
     required Color backgroundColor,
+    required SnackPosition position,
   }) {
     Get.snackbar(title, message,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: position,
         backgroundColor: backgroundColor,
         titleText: Text(
           title,

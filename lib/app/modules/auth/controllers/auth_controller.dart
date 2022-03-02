@@ -162,6 +162,6 @@ class AuthController extends GetxController {
   _clearControllers() {
     name.clear();
     email.clear();
-    password.clear();
+    password.clear(); 
   }
 }
